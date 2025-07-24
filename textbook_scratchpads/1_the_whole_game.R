@@ -72,3 +72,24 @@ usethis::use_package("stringr") # declare an intent
 
 # we can rename our updated function like so:
 usethis::rename_files("strsplit1", "str_split_one")
+# doesn't like it if you haven't commited the change yet
+# note this renames the test and main file, but /doesn't/ update the file contents
+# we need to call document() again, because NAMESPACE is still exporting the
+# old function name
+devtools::document()
+# Warning message:
+# Objects listed as exports, but not present in namespace:
+#   • strsplit1
+# This always happens when j
+devtools::test()
+
+# Use github
+# we can use use_github to set up a remote repo, as long as we have credentials
+# set up in RStudio
+usethis::use_github()
+
+# Readme
+# Github repositories need a README file
+usethis::use_readme_rmd() # make a placeholder readme and add it to build/git ignore
+# also does a git pre-commit thing that I don't understand
+devtools::build_readme()
